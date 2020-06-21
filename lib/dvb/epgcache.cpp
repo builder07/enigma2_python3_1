@@ -3591,7 +3591,7 @@ unsigned int eEPGCache::getEpgSources()
 
 static const char* getStringFromPython(ePyObject obj)
 {
-	char *result = 0;
+	const char *result = 0;
 	if (PyString_Check(obj))
 	{
 		result = PyString_AS_STRING(obj);
@@ -3618,7 +3618,7 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 
 	if (PyString_Check(serviceReferences))
 	{
-		char *refstr;
+		const char *refstr;
 		refstr = PyString_AS_STRING(serviceReferences);
 		if (!refstr)
 		{
@@ -3633,7 +3633,7 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 		for (int i = 0; i < nRefs; ++i)
 		{
 			PyObject* item = PyList_GET_ITEM(serviceReferences, i);
-			char *refstr;
+			const char *refstr;
 			refstr = PyString_AS_STRING(item);
 			if (!refstr)
 			{
@@ -3726,7 +3726,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 	std::deque<uint32_t> descr;
 	int eventid = -1;
 	const char *argstring=0;
-	char *refstr=0;
+	const char *refstr=0;
 	int argcount=0;
 	int querytype=-1;
 	bool needServiceEvent=false;
@@ -3784,7 +3784,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 				ePyObject obj = PyTuple_GET_ITEM(arg, 3);
 				if (PyString_Check(obj))
 				{
-					refstr = PyString_AS_STRING(obj);
+					const char *refstr = PyString_AS_STRING(obj);
 					eServiceReferenceDVB ref(refstr);
 					if (ref.valid())
 					{
