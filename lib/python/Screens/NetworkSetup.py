@@ -1312,7 +1312,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 	def dataAvail(self,data):
 		self.LinkState = None
 		for line in data.splitlines():
-			line = line.strip()
+			line = line.strip().decode()
 			if 'Link detected:' in line:
 				if "yes" in line:
 					self.LinkState = True
