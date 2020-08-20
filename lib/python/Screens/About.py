@@ -197,7 +197,7 @@ class OpenVisionInformation(Screen):
 		if config.misc.OVupdatecheck.value is True:
 			try:
 				if boxbranding.getVisionVersion().startswith("10"):
-					ovurl = "https://raw.githubusercontent.com/OpenVisionE2/openvision-development-platform/develop/meta-openvision/conf/distro/revision.conf"
+					ovurl = "https://raw.githubusercontent.com/OpenVisionE2/openvision-development-platform/python3/meta-openvision/conf/distro/revision.conf"
 				else:
 					ovurl = "https://raw.githubusercontent.com/OpenVisionE2/openvision-oe/develop/meta-openvision/conf/distro/revision.conf"
 				ovresponse = urllib.request.urlopen(ovurl)
