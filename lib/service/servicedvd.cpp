@@ -21,6 +21,8 @@ extern "C" {
 }
 #include "servicedvd.h"
 
+#include <Python.h>
+
 // eServiceFactoryDVD
 
 eServiceFactoryDVD::eServiceFactoryDVD()
@@ -1164,7 +1166,8 @@ void eServiceDVD::saveCuesheet()
 
 eAutoInitPtr<eServiceFactoryDVD> init_eServiceFactoryDVD(eAutoInitNumbers::service+1, "eServiceFactoryDVD");
 
-static struct PyModuleDef servicedvd_moduledef = {
+#if PY_MAJOR_VERSION >= 3
+	static struct PyModuleDef servicedvd_moduledef = {
 		PyModuleDef_HEAD_INIT,
 		"servicedvd",	/* m_name */
 		"servicedvd",	/* m_doc */
@@ -1175,8 +1178,14 @@ static struct PyModuleDef servicedvd_moduledef = {
 		NULL,			/* m_clear */
 		NULL,			/* m_free */
 	};
+#endif
 
-PyMODINIT_FUNC PyInit_servicedvd(void)
+PyMODINIT_FUNC
+initservicedvd(void)
 {
-	return PyModule_Create(&servicedvd_moduledef);
+#if PY_MAJOR_VERSION >= 3
+	PyModule_Create(&servicedvd_moduledef);
+#else
+	Py_InitModule("servicedvd", NULL);
+#endif
 }
